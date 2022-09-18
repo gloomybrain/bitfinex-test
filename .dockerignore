@@ -1,0 +1,8 @@
+# ignore everything in the root directory
+*/
+
+# except soudces and config files
+!index.js
+
+!package.json
+!package-lock.json

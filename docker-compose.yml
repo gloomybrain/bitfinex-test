@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  grape-1:
+    container_name: grape-1
+    build:
+      dockerfile: grape.dockerfile
+      context: ./
+    environment:
+      GRAPE_BOOTSTRAP: "grape-2:20000,grape-3:20000"
+
+  grape-2:
+    container_name: grape-2
+    build:
+      dockerfile: grape.dockerfile
+      context: ./
+    environment:
+      GRAPE_BOOTSTRAP: "grape-1:20000,grape-3:20000"
+
+  grape-3:
+    container_name: grape-3
+    build:
+      dockerfile: grape.dockerfile
+      context: ./
+    environment:
+      GRAPE_BOOTSTRAP: "grape-1:20000,grape-2:20000"
+  
+  client-1:
+    container_name: client-1
+    build:
+      dockerfile: client.dockerfile
+      context: ./
+    environment:
+      GRAPE_LINK_ADDRESS: "http://grape-1:3000"
+
+  client-2:
+    container_name: client-2
+    build:
+      dockerfile: client.dockerfile
+      context: ./
+    environment:
+      GRAPE_LINK_ADDRESS: "http://grape-2:3000"
+  
