@@ -33,11 +33,12 @@ services:
     environment:
       GRAPE_LINK_ADDRESS: "http://grape-1:3000"
 
-  client-2:
-    container_name: client-2
+  register-limit:
+    container_name: register-limit
     build:
       dockerfile: client.dockerfile
       context: ./
     environment:
-      GRAPE_LINK_ADDRESS: "http://grape-2:3000"
-  
+      GRAPE_LINK_ADDRESS: "http://grape-1:3000"
+      SERVICE_LISTEN_PORT: "5000"
+    command: ["node", "register-limit.js"]

@@ -3,6 +3,7 @@
 
 # except soudces and config files
 !index.js
+!register-limit.js
 
 !package.json
 !package-lock.json
